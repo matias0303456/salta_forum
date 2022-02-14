@@ -7,9 +7,9 @@ export default function Footer() {
 
     return (
         <footer className='
-            absolute 
+            relative 
             bottom-0
-            right-0
+            float-right
             p-1
             text-sm
         '

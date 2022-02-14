@@ -11,7 +11,7 @@ export default function Nuevo_post() {
 
     const [newPost, setNewPost] = useState({})
 
-    const urlNewPost = Urls.newPost
+    const urlPost = Urls.post
 
     const router = useRouter()
 
@@ -25,7 +25,7 @@ export default function Nuevo_post() {
 
     const handleSubmit = async () => {
         try {
-            const res = await axios.post(urlNewPost, newPost)
+            const res = await axios.post(urlPost, newPost)
             if (res.status === 201) {
                 router.push('/')
                 toast.success('Post creado correctamente')
