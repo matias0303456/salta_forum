@@ -19,13 +19,13 @@ export default async function handler(req, res) {
 const getPosts = async (req, res) => {
     const result = await prisma.post.findMany({
         include: {
-            author: true,
+            user: true,
             comments: {
                 include: {
-                    author: true,
+                    user: true,
                     responses: {
                         include: {
-                            author: true
+                            user: true
                         }
                     }
                 }
