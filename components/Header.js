@@ -38,6 +38,21 @@ export default function Header() {
                     >
                         Perfil
                     </li>
+                    <li
+                        className='
+                            ml-3 
+                            cursor-pointer
+                            p-1 
+                            rounded 
+                            text-black 
+                            hover:text-white 
+                            hover:bg-red-800
+                            hover:transition-all 
+                            duration-300'
+                        onClick={() => router.push('/nuevo_post')}
+                    >
+                        Nuevo
+                    </li>
                 </ul>
             </nav>
         </header>
