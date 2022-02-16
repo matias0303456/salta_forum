@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { useSession, signIn, signOut, getSession } from "next-auth/react"
+import { useSession, signIn, signOut } from "next-auth/react"
 
 export default function Header() {
 
@@ -73,17 +73,26 @@ export default function Header() {
             </nav>
             <div className='float-right'>
                 {session ?
-                    <button
-                        type='button'
-                        className='bg-black text-white p-2 rounded'
-                        onClick={() => signOut()}
-                    >
-                        Salir
-                    </button> :
+                    <>
+                        <span className='font-bold text-white mr-2'>
+                            ¡Hola, {session.token.username}!
+                        </span>
+                        <button
+                            type='button'
+                            className='bg-black text-white p-2 rounded'
+                            onClick={() => {
+                                localStorage.removeItem('user')
+                                signOut()
+                            }}
+                        >
+                            Salir
+                        </button>
+                    </> :
                     <>
                         <button
                             type='button'
                             className='bg-black text-white p-2 rounded mr-2'
+                            onClick={() => router.push('/registro')}
                         >
                             Registrarse
                         </button>

@@ -5,6 +5,7 @@ import axios from 'axios'
 import Urls from '../../helpers/Urls'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
+import { useSession } from 'next-auth/react'
 
 export default function Nuevo_post() {
 
@@ -13,11 +14,12 @@ export default function Nuevo_post() {
     const urlPost = Urls.post
 
     const router = useRouter()
+    const { data: session } = useSession()
 
     const handleChange = e => {
         setNewPost({
             ...newPost,
-            userId: 2,
+            userId: parseInt(session.token.sub),
             [e.target.name]: e.target.value
         })
     }

@@ -5,6 +5,19 @@ import Urls from "../../../helpers/Urls"
 const urlLogin = Urls.login
 
 export default NextAuth({
+  // callback para agregar el nombre de usuario al token jwt
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.username = user.username
+      }
+      return token
+    },
+    // callback para pasarle el token desencriptado, es decir la sesion, al cliente
+    session: async session => {
+      return Promise.resolve(session)
+    }
+  },
   // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
