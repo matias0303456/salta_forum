@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import Urls from '../../helpers/Urls'
+import { useSession } from 'next-auth/react'
 
 export default function Perfil() {
 
@@ -12,6 +13,7 @@ export default function Perfil() {
     const urlUser = Urls.user
 
     const router = useRouter()
+    const { data: session, status } = useSession()
 
     useEffect(async () => {
         if (router.query.username !== undefined) {
@@ -19,10 +21,26 @@ export default function Perfil() {
                 const res = await axios.get(urlUser + router.query.username)
                 setProfile(res.data)
             } catch (err) {
-                toast.error(err.message)
+                toast.error('Inicia sesión para ver esta página')
             }
         }
     }, [router.query.username])
+
+
+    if (status === 'unauthenticated') {
+        return (
+            <>
+                <Head>
+                    <title>Salta Forum</title>
+                </Head>
+                <div className='p-5'>
+                    <h1 className='font-bold text-2xl text-red-800 text-center'>
+                        Inicia sesión para ver esta página
+                    </h1>
+                </div>
+            </>
+        )
+    }
 
     return (
         <>

@@ -1,6 +1,9 @@
 import prisma from '../lib/prisma'
+import { getSession } from 'next-auth/react'
 
 export default async function handler(req, res) {
+
+    const session = await getSession({ req })
 
     switch (req.method) {
 
@@ -8,6 +11,9 @@ export default async function handler(req, res) {
             return await getPosts(req, res)
 
         case 'POST':
+            if(session === null){
+                return res.status(401).json()
+            }
             return await createPost(req, res)
 
     }

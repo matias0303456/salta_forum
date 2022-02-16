@@ -48,7 +48,7 @@ export default function Header() {
                             hover:bg-red-800
                             hover:transition-all 
                             duration-300'
-                                onClick={() => router.push('/perfil/' + 'matias0303456')}
+                                onClick={() => router.push('/perfil/' + session.token.username)}
                             >
                                 Perfil
                             </li>
@@ -81,7 +81,7 @@ export default function Header() {
                             type='button'
                             className='bg-black text-white p-2 rounded'
                             onClick={() => {
-                                localStorage.removeItem('user')
+                                router.push('/')
                                 signOut()
                             }}
                         >

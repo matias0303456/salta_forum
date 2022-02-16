@@ -14,7 +14,7 @@ export default function Nuevo_post() {
     const urlPost = Urls.post
 
     const router = useRouter()
-    const { data: session } = useSession()
+    const { data: session, status } = useSession()
 
     const handleChange = e => {
         setNewPost({
@@ -34,6 +34,21 @@ export default function Nuevo_post() {
         } catch (err) {
             toast.error(err.message)
         }
+    }
+
+    if (status === 'unauthenticated') {
+        return (
+            <>
+                <Head>
+                    <title>Salta Forum</title>
+                </Head>
+                <div className='p-5'>
+                    <h1 className='font-bold text-2xl text-red-800 text-center'>
+                        Inicia sesión para ver esta página
+                    </h1>
+                </div>
+            </>
+        )
     }
 
     return (
